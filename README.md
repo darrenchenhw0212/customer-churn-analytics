@@ -1,6 +1,22 @@
 # Customer Churn Analytics using Machine Learning
 
-> Reproducing and enhancing an enterprise SAS Viya customer churn workflow using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
+🎯 Business Problem
+Predict customer churn for retail banking customers.
+
+🏆 Champion Model
+Gradient Boosting
+
+📈 ROC AUC
+0.9889
+
+🧠 Explainability
+SHAP + LIME
+
+🏦 Original Platform
+SAS Viya
+
+🐍 Reproduced In
+Python
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange)
@@ -235,7 +251,7 @@ Potential extensions include:
 Clone the repository.
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/customer-churn-analytics.git
+git clone https://github.com/darrenchenhw0212/customer-churn-analytics.git
 ```
 
 Install dependencies.
