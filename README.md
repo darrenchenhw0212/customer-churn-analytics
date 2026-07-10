@@ -37,8 +37,6 @@ The project demonstrates an end-to-end analytical machine learning workflow, fro
 - Business-focused recommendations for customer retention
 - Reproducible notebook-based workflow with version control
 
-This repository demonstrates how an analytics workflow originally implemented using SAS Viya can be reproduced, extended, and documented using an open-source Python ecosystem.
-
 ---
 
 ## 📊 Project Workflow
@@ -84,13 +82,16 @@ This started as a SAS Viya coursework project. I rebuilt the full pipeline in Py
 | Target | `Attrition_Flag` |
 | Problem Type | Binary Classification |
 | Positive Class | Attrited Customer |
+| Class Balance | 16% Attrited / 84% Existing |
 | Leakage Handling | Naive Bayes classifier output columns removed prior to modelling |
+
+With roughly 84% of customers retained, the dataset is moderately imbalanced. Random oversampling was applied to the training set only, after the train/validation split, to avoid leaking duplicated minority-class samples into evaluation. The validation set retains the original class distribution, so the reported metrics reflect performance on realistic, imbalanced data rather than an artificially balanced one.
 
 ---
 
 ## 🏦 SAS Viya Workflow
 
-Before reproducing the workflow in Python, the complete analytics pipeline was originally developed using **SAS Viya Model Studio** as part of an predictive modelling workflow.
+Before reproducing the workflow in Python, the complete analytics pipeline was originally developed using **SAS Viya Model Studio** as part of a predictive modelling workflow.
 
 The Python implementation follows the same modelling lifecycle while extending it with modern explainability techniques and improved reproducibility.
 
@@ -113,7 +114,7 @@ The Python implementation preserves this workflow while adding SHAP, LIME, riche
 
 ## 📄 Original SAS Viya Documentation
 
-The Python implementation in this repository is based on an enterprise analytics workflow originally developed using **SAS Viya**.
+The Python implementation in this repository is based on an analytics workflow originally developed using **SAS Viya**.
 
 The original project documentation is included for reference:
 
@@ -136,9 +137,6 @@ These reports document the original SAS Viya implementation, including data prep
 | Model Comparison | Cross-model Evaluation |
 | Champion Model | Gradient Boosting |
 | Variable Importance | SHAP + Feature Importance |
-| Model Manager Registration and Scoring| Serialized Model Artifact for Future Deployment |
-| Model Governance and Life Cycle Management | Planned Through Versioning, CI/CD, and Monitoring |
-| Business Report | Notebook 06 |
 
 ---
 
@@ -162,14 +160,14 @@ Five supervised learning algorithms were evaluated.
 | Logistic Regression | Linear baseline classifier |
 | Decision Tree | Simple interpretable tree |
 | Random Forest | Bagging ensemble |
-| Gradient Boosting | Boosting emsemble (Champion model) |
+| Gradient Boosting | Boosting ensemble (Champion model) |
 | Support Vector Machine | Maximum-margin classifier |
 
 ---
 
 ### Champion Model
 
-Gradient Boosting was selected because it achieved the strongest overall balance of discrimination and churn detection, with the highest ROC AUC and recall, as well as the best F1-score among the evaluated models. Recall was particularly important because missed churners represent customers who may leave without receiving an intervention.
+Gradient Boosting was selected because it achieved the strongest overall balance of discrimination and churn detection, with the highest validation ROC AUC and recall, as well as the best F1-score among the evaluated models. Recall was particularly important because missed churners represent customers who may leave without receiving an intervention.
 
 This model was therefore selected for subsequent explainability analysis and business recommendation development.
 
@@ -195,13 +193,13 @@ This makes the model well suited for identifying high-risk customers early, enab
 
 ## 🧠 Explainable AI
 
-Traditional enterprise workflows often rely on feature importance rankings to explain model behaviour.
+Traditional analytical workflows often rely on feature importance rankings to explain model behaviour.
 
 This repository extends that capability using modern Explainable AI techniques that provide both global and local model interpretations.
 
 The explainability workflow progresses from traditional model feature importance to SHAP and LIME for greater transparency and stakeholder trust.
 
-### Enterprise Variable Importance (SAS)
+### SAS Viya Variable Importance
 
 <p align="center">
     <img src="images/sas_variable_importance.png" width="85%">
@@ -209,7 +207,7 @@ The explainability workflow progresses from traditional model feature importance
 
 Traditional feature importance provides a useful global ranking of predictor relevance, but it cannot explain individual customer predictions.
 
-For this reason, the Python implementation extends the enterprise workflow using SHAP and LIME.
+For this reason, the Python implementation extends the original SAS Viya workflow using SHAP and LIME.
 The original SAS workflow identified transaction behaviour as the dominant predictor of customer churn.
 
 ---
@@ -224,7 +222,7 @@ The SHAP summary plot reveals that **customer behaviour**, rather than demograph
 
 The global SHAP analysis identifies `Total_Trans_Ct`, `Total_Trans_Amt`, and `Total_Revolving_Bal` as the three most influential predictors. The number of banking relationships and changes in transaction activity also contribute meaningfully to churn predictions.
 
-This indicates that declining customer engagement is a stronger predictor of churn than static customer demographics.
+Overall, the global explanations suggest that declining customer engagement is a stronger predictor of churn than static customer demographics.
 
 ---
 
@@ -258,7 +256,7 @@ The agreement reduces reliance on a single explanation method and strengthens co
 
 ### 🏆 Champion Model Lifecycle
 
-The enterprise workflow concluded with deployment of the champion model into **SAS Model Manager** for operational scoring.
+The champion model was registered in SAS Model Manager and validated via a batch scoring test: 500 records were randomly sampled from the original dataset, stripped of the target variable, and scored to simulate unseen customer data. The output included churn probability, predicted class, and posterior probabilities per customer — output that could be consumed directly by a CRM or retention system
 
 <p align="center">
     <img src="images/sas_model_manager.png" width="80%">
@@ -275,10 +273,10 @@ This establishes a deployment-ready model artifact, while API serving, versionin
 
 The analyses consistently demonstrated that:
 
+- Transaction behaviour is substantially more predictive than demographic characteristics.
 - Low transaction count is the strongest indicator of customer churn.
 - Reduced customer spending increases churn probability.
 - Customers with fewer banking relationships are significantly more likely to churn.
-- Transaction behaviour is substantially more predictive than demographic characteristics.
 - SHAP and LIME independently produced highly consistent explanations, increasing confidence in the model's robustness.
 
 ---
@@ -296,14 +294,16 @@ The analysis suggests several data-driven retention strategies.
 
 These recommendations are intended to guide customer retention initiatives and should be validated through controlled business experiments before large-scale deployment.
 
+Examples include A/B testing of retention campaigns and measuring incremental customer retention.
+
 ---
 
 ## Lessons Learned
 
-Developing this project provided several practical insights into enterprise analytics workflows.
+Developing this project provided several practical insights into building and documenting analytics workflows.
 
 - High predictive performance alone is insufficient without model interpretability.
-- Reproducing proprietary analytics workflows in Python improves transparency and reproducibility.
+- Reproducing SAS Viya analytics workflows in Python improves transparency and reproducibility.
 - Explainable AI enables technical model outputs to be translated into business decisions.
 - Organising machine learning projects into modular notebooks improves maintainability and collaboration.
 
@@ -326,8 +326,8 @@ Developing this project provided several practical insights into enterprise anal
 
 ## 🚀 Future Roadmap
 
-- Add automated tests and GitHub Actions validation.
 - Package preprocessing and prediction in a single deployable pipeline.
+- Add automated tests and GitHub Actions validation.
 - Expose churn probability through a lightweight FastAPI service.
 
 --- 
@@ -387,15 +387,15 @@ jupyter notebook
 To reproduce the complete analytics workflow, execute the notebooks from the repository root in numerical order:
 
 ```text
-01_data_understanding.ipynb
+01_data_understanding_and_quality.ipynb
         ↓
-02_data_preprocessing.ipynb
+02_data_preparation.ipynb
         ↓
-03_data_preparation.ipynb
+03_feature_engineering.ipynb
         ↓
 04_model_development_and_evaluation.ipynb
         ↓
-05_model_interpretation.ipynb
+05_model_interpretation_shap_lime.ipynb
         ↓
 06_business_recommendations_and_conclusion.ipynb
 ```
