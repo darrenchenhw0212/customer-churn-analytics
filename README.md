@@ -1,6 +1,6 @@
 # Customer Churn Analytics using Machine Learning
 
-Reproducing and enhancing an enterprise SAS Viya customer churn workflow using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
+Reproducing and enhancing an analytics workflow originally implemented using the enterprise platform SAS Viya focusing on customer churn using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange)
@@ -25,9 +25,9 @@ Reproducing and enhancing an enterprise SAS Viya customer churn workflow using P
 
 ## ⭐ Why This Repository?
 
-Unlike a typical machine learning project, this repository reproduces an enterprise customer churn analytics workflow originally developed in **SAS Viya Model Studio**, then enhances it using modern open-source Python tools.
+Unlike a typical machine learning project, this repository reproduces an analytics workflow originally implemented using the enterprise platform **SAS Viya Model Studio**, then enhances it using modern open-source Python tools.
 
-The project demonstrates the complete lifecycle of a production-oriented machine learning workflow:
+The project demonstrates an end-to-end analytical machine learning workflow, from enterprise data preparation and model development to explainability and business recommendations.
 
 - Enterprise data preparation using SAS Viya
 - Python reproduction of the entire modelling pipeline
@@ -42,7 +42,7 @@ Rather than treating Python as a replacement for SAS, this repository shows how 
 
 ## 📊 Project Workflow
 
-The following diagram summarises the complete analytics workflow, from the original enterprise SAS Viya implementation to the enhanced Python-based machine learning pipeline.
+The following diagram summarises the complete analytics workflow, from the original enterprise platform SAS Viya implementation to the enhanced Python-based machine learning pipeline.
 
 <p align="center">
   <img src="images/churn_workflow.svg" alt="Customer Churn Analytics Workflow" width="100%">
@@ -50,17 +50,25 @@ The following diagram summarises the complete analytics workflow, from the origi
 
 ---
 
-# Project Overview
+## Project Overview
 
-Customer churn is one of the most significant challenges faced by financial institutions. Acquiring new customers is substantially more expensive than retaining existing ones, making early identification of at-risk customers essential for improving profitability and long-term customer loyalty.
+Customer churn is one of the most significant challenges faced by financial institutions. Customer churn can reduce recurring value and increase the need for replacement acquisition, making early identification of at-risk customers commercially important for improving profitability and long-term customer loyalty.
 
-This project develops an end-to-end customer churn analytics pipeline capable of accurately identifying customers with a high likelihood of churn using supervised machine learning.
+This project develops an end-to-end customer churn analytics pipeline designed to estimate customer churn risk using supervised machine learning.
 
-Unlike a typical university assignment, this repository reproduces and extends an enterprise workflow originally developed using **SAS Viya** by implementing the entire analytics pipeline in **Python**, while improving reproducibility, model explainability, and documentation.
+Unlike a typical university assignment, this repository reproduces and extends an analytics workflow originally implemented using the enterprise platform SAS Viya by implementing the entire analytics pipeline in **Python**, while improving reproducibility, model explainability, and documentation.
 
 ---
 
-# Objectives
+## Dataset
+
+The project uses the public Credit Card Customers dataset containing 10,127 customer records and demographic, account, and transaction attributes. The target was derived from `Attrition_Flag`, with attrited customers represented as the positive churn class.
+
+Leakage-prone classifier-output columns supplied with the original dataset were excluded before modelling.
+
+---
+
+## Objectives
 
 The objectives of this project are to:
 
@@ -86,7 +94,7 @@ These reports document the original SAS Viya implementation, including enterpris
 
 ---
 
-# 🏦 Enterprise SAS Viya Workflow
+## 🏦 Enterprise SAS Viya Workflow
 
 Before reproducing the workflow in Python, the complete analytics pipeline was originally developed using **SAS Viya Model Studio** as part of an enterprise predictive modelling workflow.
 
@@ -108,7 +116,8 @@ The original SAS implementation included:
 The Python implementation preserves this workflow while adding SHAP, LIME, richer evaluation metrics, and notebook-based reproducibility.
 
 ---
-# 🔄 Enterprise SAS Viya → Python Reproduction
+
+## 🔄 Enterprise SAS Viya → Python Reproduction
 
 | Enterprise SAS Viya | Python Implementation |
 |---------------------|-----------------------|
@@ -119,10 +128,22 @@ The Python implementation preserves this workflow while adding SHAP, LIME, riche
 | Model Comparison | Cross-model Evaluation |
 | Champion Model | Gradient Boosting |
 | Variable Importance | SHAP + Feature Importance |
-| Model Manager | Joblib Model Serialization |
+| Model Manager Registration and Scoring| Serialized Model Artifact for Future Deployment |
+| Model Governance and Life Cycle Management | Planned Through Versioning, CI/CD, and Monitoring |
 | Business Report | Notebook 06 |
 
 The objective of this repository was not simply to rebuild an existing workflow, but to demonstrate how an enterprise analytics solution can be migrated to an open-source, reproducible machine learning pipeline while maintaining business interpretability.
+
+---
+
+### SAS Viya and Python Results
+
+Both implementations selected Gradient Boosting as the strongest model. However, their performance values should not be interpreted as a direct benchmark because the preprocessing, feature-selection strategy, model configuration, and evaluated model set differ between the SAS Viya and Python workflows.
+
+| Implementation | Champion | ROC AUC |
+|---|---|---:|
+| SAS Viya | Gradient Boosting | 0.9802 |
+| Python | Gradient Boosting | 0.9889 |
 
 ---
 
@@ -130,14 +151,14 @@ The objective of this repository was not simply to rebuild an existing workflow,
 
 | Notebook | Description |
 |-----------|-------------|
-| **01 – Data Understanding** | Data exploration, quality assessment and churn analysis |
-| **02 – Data Preprocessing** | Missing value handling, encoding and data cleaning |
+| **01 – Data Understanding and Quality** | Data exploration, quality assessment and churn analysis |
+| **02 – Data Preparation** | Missing value handling, encoding and data cleaning |
 | **03 – Feature Engineering** | Feature engineering and preparation of modelling datasets |
-| **04 – Model Development & Evaluation** | Model training, evaluation and champion model selection |
-| **05 – Model Interpretation** | Explainable AI using SHAP and LIME |
-| **06 – Business Recommendations** | Business insights, deployment considerations and future recommendations |
+| **04 – Model Development and Evaluation** | Model training, evaluation and champion model selection |
+| **05 – Model Interpretation using SHAP and LIME** | Explainable AI using SHAP and LIME |
+| **06 – Business Recommendations and Conclusion** | Business insights, deployment considerations and future recommendations |
 
-# Machine Learning Models
+## Machine Learning Models
 
 Five supervised learning algorithms were evaluated.
 
@@ -151,35 +172,9 @@ Five supervised learning algorithms were evaluated.
 
 ---
 
-# Champion Model
+### Champion Model
 
-## 📈 ROC Curve Comparison
-
-<p align="center">
-  <img src="images/roc_curve.png" width="85%">
-</p>
-
-Gradient Boosting consistently outperformed the remaining machine learning algorithms, achieving the highest ROC AUC (**0.9889**).
-
-The ROC curve rises sharply toward the upper-left corner, indicating excellent discrimination between churned and retained customers while maintaining a very low false positive rate.
-
-This makes the model well suited for identifying high-risk customers early, enabling proactive customer retention strategies.
-
-# 🧠 Explainable AI
-
-Traditional enterprise workflows often rely on feature importance rankings to explain model behaviour.
-
-This repository extends that capability using modern Explainable AI techniques that provide both global and local model interpretations.
-
-The explainability workflow progresses from traditional model feature importance to SHAP and LIME for greater transparency and stakeholder trust.
-
-## Enterprise Variable Importance (SAS)
-
-<p align="center">
-    <img src="images/sas_variable_importance.png" width="85%">
-</p>
-
-The original SAS workflow identified transaction behaviour as the dominant predictor of customer churn.
+Gradient Boosting was selected because it achieved the strongest overall balance of discrimination and churn detection, with the highest ROC AUC and recall, as well as the best F1-score among the evaluated models. Recall was particularly important because missed churners represent customers who may leave without receiving an intervention.
 
 | Metric | Score |
 |---------|------:|
@@ -188,6 +183,34 @@ The original SAS workflow identified transaction behaviour as the dominant predi
 | Recall | **93.65%** |
 | F1-score | **86.80%** |
 | ROC AUC | **0.9889** |
+
+### 📈 ROC Curve Comparison
+
+<p align="center">
+  <img src="images/roc_curve.png" width="85%">
+</p>
+
+Gradient Boosting consistently outperformed the remaining machine learning algorithms, achieving the highest ROC AUC (**0.9889**).
+
+The curve shows strong sensitivity across low false-positive-rate regions. An operational threshold would still need to be selected according to intervention cost, retention capacity, and the relative cost of missed churners.
+
+This makes the model well suited for identifying high-risk customers early, enabling proactive customer retention strategies.
+
+## 🧠 Explainable AI
+
+Traditional enterprise workflows often rely on feature importance rankings to explain model behaviour.
+
+This repository extends that capability using modern Explainable AI techniques that provide both global and local model interpretations.
+
+The explainability workflow progresses from traditional model feature importance to SHAP and LIME for greater transparency and stakeholder trust.
+
+### Enterprise Variable Importance (SAS)
+
+<p align="center">
+    <img src="images/sas_variable_importance.png" width="85%">
+</p>
+
+The original SAS workflow identified transaction behaviour as the dominant predictor of customer churn.
 
 ---
 
@@ -199,7 +222,7 @@ The original SAS workflow identified transaction behaviour as the dominant predi
 
 The SHAP summary plot reveals that **customer behaviour**, rather than demographic characteristics, drives the majority of churn predictions.
 
-Transaction frequency (`Total_Trans_Ct`), transaction amount (`Total_Trans_Amt`), and the number of banking relationships (`Total_Relationship_Count`) consistently contribute the greatest impact on model predictions.
+The global SHAP analysis identifies `Total_Trans_Ct`, `Total_Trans_Amt`, and `Total_Revolving_Bal` as the three most influential predictors. The number of banking relationships and changes in transaction activity also contribute meaningfully to churn predictions.
 
 This indicates that declining customer engagement is a stronger predictor of churn than static customer demographics.
 ---
@@ -228,11 +251,11 @@ LIME provides an independent local explanation of the same prediction using a su
 
 The explanation closely aligns with SHAP by highlighting low transaction activity and reduced customer engagement as the primary drivers of churn.
 
-The agreement between SHAP and LIME increases confidence that the Gradient Boosting model is making consistent and reliable predictions rather than relying on spurious correlations.
+The agreement reduces reliance on a single explanation method and strengthens confidence that the highlighted local drivers are stable across two complementary approaches.
 
 ---
 
-# 🏆 Champion Model Lifecycle
+### 🏆 Champion Model Lifecycle
 
 The enterprise workflow concluded with deployment of the champion model into **SAS Model Manager** for operational scoring.
 
@@ -242,11 +265,11 @@ The enterprise workflow concluded with deployment of the champion model into **S
 
 In this repository, the selected Gradient Boosting model is exported as a serialized Python model (`gradient_boosting_model.pkl`) for future deployment into production environments such as REST APIs, Streamlit dashboards, or cloud platforms.
 
-This demonstrates the transition from an enterprise SAS deployment workflow to an open-source Python deployment workflow.
+This establishes a deployment-ready model artifact, while API serving, versioning, and monitoring remain future engineering work.
 
 ---
 
-# Key Findings
+## Key Findings
 
 The analyses consistently demonstrated that:
 
@@ -258,7 +281,7 @@ The analyses consistently demonstrated that:
 
 ---
 
-# Business Recommendations
+## Business Recommendations
 
 The model supports proactive customer retention by identifying high-risk customers before they churn.
 
@@ -272,7 +295,7 @@ Recommended actions include:
 
 ---
 
-# 📚 Lessons Learned
+## 📚 Lessons Learned
 
 Developing this project provided several practical insights into both enterprise analytics and modern machine learning workflows.
 
@@ -316,30 +339,9 @@ Key lessons include:
 
 ## 🚀 Future Roadmap
 
-### Engineering
-
-- GitHub Actions CI/CD
-- Automated unit testing
-- Docker containerisation
-
-### MLOps
-
-- Model versioning
-- Model monitoring
-- Automated retraining
-- Drift detection
-
-### Cloud Deployment
-
-- AWS SageMaker deployment
-- REST API with FastAPI
-- Streamlit dashboard
-
-### Explainable AI
-
-- Counterfactual explanations
-- Fairness and bias analysis
-- Model cards
+- Add automated tests and GitHub Actions validation.
+- Package preprocessing and prediction in a single deployable pipeline.
+- Expose churn probability through a lightweight FastAPI service.
 
 ---
 
@@ -354,33 +356,37 @@ Key lessons include:
 
 --- 
 
-# Repository Structure
+## Repository Structure
 
-```text
+```text 
 customer-churn-analytics/
-
 ├── data/
 │   ├── raw/
 │   └── processed/
-│
 ├── docs/
 │   ├── project_proposal.pdf
-│   ├── sas_viya_data_preparation.pdf
-│   └── sas_viya_predictive_modelling.pdf
-│
+│   ├── data_preparation_report.pdf
+│   └── predictive_modelling_report.pdf
 ├── images/
-│
+│   ├── churn_workflow.svg
+│   ├── roc_curve.png
+│   ├── shap_summary.png
+│   ├── shap_waterfall.png
+│   ├── lime_explanation.png
+│   ├── sas_pipeline2.png
+│   ├── sas_variable_importance.png
+│   └── sas_model_manager.png
 ├── models/
 │   └── gradient_boosting_model.pkl
-│
 ├── notebooks/
-│   ├── 01_data_understanding.ipynb
-│   ├── 02_data_preprocessing.ipynb
-│   ├── 03_data_preparation.ipynb
+│   ├── 01_data_understanding_and_quality.ipynb
+│   ├── 02_data_preparation.ipynb
+│   ├── 03_feature_engineering.ipynb
 │   ├── 04_model_development_and_evaluation.ipynb
-│   ├── 05_model_interpretation.ipynb
+│   ├── 05_model_interpretation_shap_lime.ipynb
 │   └── 06_business_recommendations_and_conclusion.ipynb
-│
+├── src/
+├── .gitignore
 ├── requirements.txt
 ├── LICENSE
 └── README.md
@@ -388,9 +394,21 @@ customer-churn-analytics/
 
 ---
 
-# 🔄 Reproducing Results
+## 🔄 Installation and Reproducing Results
 
-To reproduce the complete analytics workflow, execute the notebooks sequentially:
+```bash
+git clone https://github.com/darrenchenhw0212/customer-churn-analytics.git
+cd customer-churn-analytics
+
+python3.12 -m venv .venv
+source .venv/bin/activate        # macOS/Linux
+# .venv\Scripts\activate         # Windows
+
+pip install -r requirements.txt
+jupyter notebook
+```
+
+To reproduce the complete analytics workflow, execute the notebooks from the repository root in numerical order:
 
 ```text
 01_data_understanding.ipynb
@@ -405,32 +423,20 @@ To reproduce the complete analytics workflow, execute the notebooks sequentially
         ↓
 06_business_recommendations_and_conclusion.ipynb
 ```
+The workflow produces processed datasets under data/processed/ and the trained model artifact under models/.
+---
+
+## Limitations
+
+- The analysis uses a single public, static dataset and has not been validated on recent banking data.
+- Performance was measured on a held-out validation set rather than an external or temporal test set.
+- Model explanations describe predictive associations and should not be interpreted as causal effects.
+- The current model artifact is not yet exposed through a production inference service.
+- Retention costs, customer lifetime value, and intervention capacity were not available for business-threshold optimisation.
 
 ---
 
-# Installation
-
-Clone the repository.
-
-```bash
-git clone https://github.com/darrenchenhw0212/customer-churn-analytics.git
-```
-
-Install dependencies.
-
-```bash
-pip install -r requirements.txt
-```
-
-Launch Jupyter Notebook.
-
-```bash
-jupyter notebook
-```
-
----
-
-# Acknowledgements
+## Acknowledgements
 
 - Kaggle Credit Card Customers Dataset
 - SAS Viya Model Studio
@@ -440,6 +446,6 @@ jupyter notebook
 
 ---
 
-# License
+## License
 
 This project is released under the MIT License.
