@@ -1,4 +1,4 @@
-# Customer Churn Analytics using Machine Learning
+# Customer Churn Analytics
 
 Reproducing and extending a customer churn analytics workflow, originally built in SAS Viya during coursework, using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
 
@@ -28,7 +28,7 @@ Reproducing and extending a customer churn analytics workflow, originally built 
 
 SAS Viya is an enterprise analytics software; this project uses Python to reproduce and extend a workflow I originally built with it.
 
-The project demonstrates an end-to-end analytical machine learning workflow, from data preparation and model development to explainability and business recommendations.
+The project demonstrates an end-to-end analytics workflow, from data preparation and model development to explainability and business recommendations.
 
 - Data preparation using SAS Viya
 - Python reproduction of the entire modelling pipeline
@@ -83,7 +83,8 @@ This started as a SAS Viya coursework project. I rebuilt the full pipeline in Py
 | Problem Type | Binary Classification |
 | Positive Class | Attrited Customer |
 | Class Balance | 16% Attrited / 84% Existing |
-| Leakage Handling | Naive Bayes classifier output columns removed prior to modelling |
+| Leakage Handling | Removed Naive Bayes output features to prevent target leakage. |
+| Train / Validation Split | 80 / 20 | 
 
 With roughly 84% of customers retained, the dataset is moderately imbalanced. Random oversampling was applied to the training set only, after the train/validation split, to avoid leaking duplicated minority-class samples into evaluation. The validation set retains the original class distribution, so the reported metrics reflect performance on realistic, imbalanced data rather than an artificially balanced one.
 
@@ -133,7 +134,7 @@ These reports document the original SAS Viya implementation, including data prep
 | Data Preparation Node | Notebook 02 |
 | Feature Engineering Pipeline | Notebook 03 |
 | Model Studio | Scikit-Learn |
-| Variable Selection / Clustering | Feature Engineering |
+| Variable Selection / Clustering | Feature Selection and Engineering (Python) |
 | Model Comparison | Cross-model Evaluation |
 | Champion Model | Gradient Boosting |
 | Variable Importance | SHAP + Feature Importance |
@@ -146,8 +147,8 @@ Both implementations selected Gradient Boosting as the strongest model. However,
 
 | Implementation | Champion | ROC AUC |
 |---|---|---:|
-| SAS Viya | Gradient Boosting | 0.9802 |
-| Python | Gradient Boosting | 0.9889 |
+| SAS Viya | **Gradient Boosting** | 0.9802 |
+| Python | **Gradient Boosting** | 0.9889 |
 
 ---
 
@@ -193,7 +194,7 @@ This makes the model well suited for identifying high-risk customers early, enab
 
 ## 🧠 Explainable AI
 
-Traditional analytical workflows often rely on feature importance rankings to explain model behaviour.
+Traditional machine learning workflows often rely on feature importance rankings to explain model behaviour.
 
 This repository extends that capability using modern Explainable AI techniques that provide both global and local model interpretations.
 
@@ -262,7 +263,7 @@ The champion model was registered in SAS Model Manager and validated via a batch
     <img src="images/sas_model_manager.png" width="80%">
 </p>
 
-In this repository, the selected Gradient Boosting model is exported as a serialized Python model (`gradient_boosting_model.pkl`) for future deployment into production environments such as REST APIs, Streamlit dashboards, or cloud platforms.
+In this repository, the selected Gradient Boosting model is exported as a serialized Python model (`gradient_boosting_model.pkl`) for future deployment into production environments (e.g. REST APIs or cloud services).
 
 This establishes a deployment-ready model artifact, while API serving, versioning, and monitoring remain future engineering work.
 
@@ -302,7 +303,7 @@ Examples include A/B testing of retention campaigns and measuring incremental cu
 
 Developing this project provided several practical insights into building and documenting analytics workflows.
 
-- High predictive performance alone is insufficient without model interpretability.
+- High predictive performance alone is insufficient for business adoption without model interpretability.
 - Reproducing SAS Viya analytics workflows in Python improves transparency and reproducibility.
 - Explainable AI enables technical model outputs to be translated into business decisions.
 - Organising machine learning projects into modular notebooks improves maintainability and collaboration.
@@ -329,6 +330,7 @@ Developing this project provided several practical insights into building and do
 - Package preprocessing and prediction in a single deployable pipeline.
 - Add automated tests and GitHub Actions validation.
 - Expose churn probability through a lightweight FastAPI service.
+- Containerise deployment using Docker.
 
 --- 
 
