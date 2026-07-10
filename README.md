@@ -1,6 +1,7 @@
 # Customer Churn Analytics using Machine Learning
 
-Reproducing and enhancing an analytics workflow originally implemented using the enterprise platform SAS Viya focusing on customer churn using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
+Reproducing and extending a customer churn analytics workflow, originally built in SAS Viya during coursework, using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
+
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange)
@@ -25,24 +26,24 @@ Reproducing and enhancing an analytics workflow originally implemented using the
 
 ## ⭐ Why This Repository?
 
-Unlike a typical machine learning project, this repository reproduces an analytics workflow originally implemented using the enterprise platform **SAS Viya Model Studio**, then enhances it using modern open-source Python tools.
+SAS Viya is an enterprise analytics software; this project uses Python to reproduce and extend a workflow I originally built with it.
 
-The project demonstrates an end-to-end analytical machine learning workflow, from enterprise data preparation and model development to explainability and business recommendations.
+The project demonstrates an end-to-end analytical machine learning workflow, from data preparation and model development to explainability and business recommendations.
 
-- Enterprise data preparation using SAS Viya
+- Data preparation using SAS Viya
 - Python reproduction of the entire modelling pipeline
 - Multi-model comparison and champion model selection
 - Explainable AI using SHAP and LIME
 - Business-focused recommendations for customer retention
 - Reproducible notebook-based workflow with version control
 
-Rather than replacing SAS Viya, this repository demonstrates how an analytics workflow originally implemented in an enterprise platform can be reproduced, extended, and documented using an open-source Python ecosystem.
+This repository demonstrates how an analytics workflow originally implemented using SAS Viya can be reproduced, extended, and documented using an open-source Python ecosystem.
 
 ---
 
 ## 📊 Project Workflow
 
-The following diagram summarises the complete analytics workflow, from the original enterprise platform SAS Viya implementation to the enhanced Python-based machine learning pipeline.
+The following diagram summarises the complete analytics workflow, from the original SAS Viya implementation to the enhanced Python-based machine learning pipeline.
 
 <p align="center">
   <img src="images/churn_workflow.svg" alt="Customer Churn Analytics Workflow" width="100%">
@@ -69,7 +70,7 @@ Customer churn is one of the most significant challenges faced by financial inst
 
 This project develops an end-to-end customer churn analytics pipeline designed to estimate customer churn risk using supervised machine learning.
 
-Unlike a typical university assignment, this repository reproduces and extends an analytics workflow originally implemented using the enterprise platform SAS Viya by implementing the entire analytics pipeline in **Python**, while improving reproducibility, model explainability, and documentation.
+This started as a SAS Viya coursework project. I rebuilt the full pipeline in Python to practice production-style tooling — reproducibility, explainability, and documentation beyond what the original assignment required.
 
 ---
 
@@ -87,23 +88,9 @@ Unlike a typical university assignment, this repository reproduces and extends a
 
 ---
 
-## 📄 Original Enterprise Documentation
+## 🏦 SAS Viya Workflow
 
-The Python implementation in this repository is based on an enterprise analytics workflow originally developed using **SAS Viya**.
-
-The original project documentation is included for reference:
-
-- 📘 [Project Proposal](docs/project_proposal.pdf)
-- 📙 [Data Preparation Report](docs/data_preparation_report.pdf)
-- 📗 [Predictive Modelling Report](docs/predictive_modelling_report.pdf)
-
-These reports document the original SAS Viya implementation, including enterprise data preparation, model development, champion model selection, and business recommendations that were later reproduced and enhanced using Python.
-
----
-
-## 🏦 Enterprise SAS Viya Workflow
-
-Before reproducing the workflow in Python, the complete analytics pipeline was originally developed using **SAS Viya Model Studio** as part of an enterprise predictive modelling workflow.
+Before reproducing the workflow in Python, the complete analytics pipeline was originally developed using **SAS Viya Model Studio** as part of an predictive modelling workflow.
 
 The Python implementation follows the same modelling lifecycle while extending it with modern explainability techniques and improved reproducibility.
 
@@ -118,15 +105,29 @@ The original SAS implementation included:
 - Variable clustering
 - Model comparison
 - Champion model selection
-- Model registration
+- Model registration (within SAS Viya's training/demo environment)
 
 The Python implementation preserves this workflow while adding SHAP, LIME, richer evaluation metrics, and notebook-based reproducibility.
 
 ---
 
-## 🔄 Enterprise SAS Viya → Python Reproduction
+## 📄 Original SAS Viya Documentation
 
-| Enterprise SAS Viya | Python Implementation |
+The Python implementation in this repository is based on an enterprise analytics workflow originally developed using **SAS Viya**.
+
+The original project documentation is included for reference:
+
+- 📘 [Project Proposal](docs/project_proposal.pdf)
+- 📙 [Data Preparation Report](docs/data_preparation_report.pdf)
+- 📗 [Predictive Modelling Report](docs/predictive_modelling_report.pdf)
+
+These reports document the original SAS Viya implementation, including data preparation, model development, champion model selection, and business recommendations that were later reproduced and enhanced using Python.
+
+---
+
+## 🔄 SAS Viya → Python Reproduction
+
+| SAS Viya | Python Implementation |
 |---------------------|-----------------------|
 | Data Preparation Node | Notebook 02 |
 | Feature Engineering Pipeline | Notebook 03 |
@@ -138,8 +139,6 @@ The Python implementation preserves this workflow while adding SHAP, LIME, riche
 | Model Manager Registration and Scoring| Serialized Model Artifact for Future Deployment |
 | Model Governance and Life Cycle Management | Planned Through Versioning, CI/CD, and Monitoring |
 | Business Report | Notebook 06 |
-
-The objective of this repository was not simply to rebuild an existing workflow, but to demonstrate how an enterprise analytics solution can be migrated to an open-source, reproducible machine learning pipeline while maintaining business interpretability.
 
 ---
 
@@ -161,9 +160,9 @@ Five supervised learning algorithms were evaluated.
 | Model | Purpose |
 |--------|----------|
 | Logistic Regression | Linear baseline classifier |
-| Decision Tree | Interpretable tree-based model |
-| Random Forest | Ensemble learning |
-| Gradient Boosting | Champion model |
+| Decision Tree | Simple interpretable tree |
+| Random Forest | Bagging ensemble |
+| Gradient Boosting | Boosting emsemble (Champion model) |
 | Support Vector Machine | Maximum-margin classifier |
 
 ---
@@ -171,6 +170,8 @@ Five supervised learning algorithms were evaluated.
 ### Champion Model
 
 Gradient Boosting was selected because it achieved the strongest overall balance of discrimination and churn detection, with the highest ROC AUC and recall, as well as the best F1-score among the evaluated models. Recall was particularly important because missed churners represent customers who may leave without receiving an intervention.
+
+This model was therefore selected for subsequent explainability analysis and business recommendation development.
 
 | Metric | Score |
 |---------|------:|
@@ -206,6 +207,9 @@ The explainability workflow progresses from traditional model feature importance
     <img src="images/sas_variable_importance.png" width="85%">
 </p>
 
+Traditional feature importance provides a useful global ranking of predictor relevance, but it cannot explain individual customer predictions.
+
+For this reason, the Python implementation extends the enterprise workflow using SHAP and LIME.
 The original SAS workflow identified transaction behaviour as the dominant predictor of customer churn.
 
 ---
@@ -221,6 +225,7 @@ The SHAP summary plot reveals that **customer behaviour**, rather than demograph
 The global SHAP analysis identifies `Total_Trans_Ct`, `Total_Trans_Amt`, and `Total_Revolving_Bal` as the three most influential predictors. The number of banking relationships and changes in transaction activity also contribute meaningfully to churn predictions.
 
 This indicates that declining customer engagement is a stronger predictor of churn than static customer demographics.
+
 ---
 
 ### SHAP Waterfall Plot
@@ -263,16 +268,17 @@ In this repository, the selected Gradient Boosting model is exported as a serial
 
 This establishes a deployment-ready model artifact, while API serving, versioning, and monitoring remain future engineering work.
 
+
 ---
 
 ## Key Findings
 
 The analyses consistently demonstrated that:
 
-- Transaction behaviour is substantially more predictive than demographic characteristics.
 - Low transaction count is the strongest indicator of customer churn.
 - Reduced customer spending increases churn probability.
 - Customers with fewer banking relationships are significantly more likely to churn.
+- Transaction behaviour is substantially more predictive than demographic characteristics.
 - SHAP and LIME independently produced highly consistent explanations, increasing confidence in the model's robustness.
 
 ---
@@ -307,7 +313,7 @@ Developing this project provided several practical insights into enterprise anal
 
 | Area | Technologies |
 |------|--------------|
-| 💻 **Programming** | Python 3.12 |
+| 💻 **Programming Language** | Python 3.12 |
 | 📊 **Data Analysis** | Pandas, NumPy |
 | 🤖 **Machine Learning** | Scikit-learn |
 | 🧠 **Explainable AI** | SHAP, LIME |
