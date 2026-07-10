@@ -404,8 +404,10 @@ To reproduce the complete analytics workflow, execute the notebooks sequentially
 05_model_interpretation.ipynb
         ↓
 06_business_recommendations_and_conclusion.ipynb
+```
 
 ---
+
 # Installation
 
 Clone the repository.
