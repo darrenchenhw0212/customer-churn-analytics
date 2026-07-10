@@ -1,22 +1,6 @@
 # Customer Churn Analytics using Machine Learning
 
-🎯 Business Problem
-Predict customer churn for retail banking customers.
-
-🏆 Champion Model
-Gradient Boosting
-
-📈 ROC AUC
-0.9889
-
-🧠 Explainability
-SHAP + LIME
-
-🏦 Original Platform
-SAS Viya
-
-🐍 Reproduced In
-Python
+> Reproducing and enhancing an enterprise SAS Viya customer churn workflow using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange)
@@ -25,6 +9,17 @@ Python
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
+## 🚀 Project Highlights
+
+| Item | Result |
+|------|--------|
+| 🎯 Business Problem | Predict customer churn for retail banking customers |
+| 🏆 Champion Model | Gradient Boosting |
+| 📈 ROC AUC | **0.9889** |
+| 🎯 Recall | **93.65%** |
+| 🧠 Explainability | SHAP & LIME |
+| 🏦 Original Platform | SAS Viya |
+| 🐍 Reproduced In | Python |
 ---
 
 # Project Overview
@@ -69,45 +64,35 @@ This repository reproduces that workflow using open-source Python libraries whil
 - GitHub documentation
 - engineering best practices
 
-Supporting documentation can be found in the `docs/` directory.
+Supporting documentation describing the original enterprise workflow is included in the **docs/** directory:
+
+- Project Proposal
+- SAS Viya Data Preparation Report
+- SAS Viya Predictive Modelling Report
+
+These documents provide the foundation for the Python implementation presented in this repository.
 
 ---
 
-# Workflow
+## 📊 Project Workflow
 
-```text
-Raw Customer Data
-        │
-        ▼
-Notebook 1
-Data Understanding
-        │
-        ▼
-Notebook 2
-Data Preprocessing
-        │
-        ▼
-Notebook 3
-Feature Engineering
-        │
-        ▼
-Notebook 4
-Model Development
-        │
-        ▼
-Notebook 5
-Model Interpretation
-(SHAP & LIME)
-        │
-        ▼
-Notebook 6
-Business Recommendations
-        │
-        ▼
-Champion Model
-```
+The following diagram summarises the complete analytics workflow, from the original enterprise SAS Viya implementation to the enhanced Python-based machine learning pipeline.
 
+<p align="center">
+  <img src="images/churn_workflow.svg" alt="Customer Churn Analytics Workflow" width="100%">
+</p>
 ---
+
+## 📒 Notebook Guide
+
+| Notebook | Description |
+|-----------|-------------|
+| **01 – Data Understanding** | Data exploration, quality assessment and churn analysis |
+| **02 – Data Preprocessing** | Missing value handling, encoding and data cleaning |
+| **03 – Feature Engineering** | Feature engineering and preparation of modelling datasets |
+| **04 – Model Development & Evaluation** | Model training, evaluation and champion model selection |
+| **05 – Model Interpretation** | Explainable AI using SHAP and LIME |
+| **06 – Business Recommendations** | Business insights, deployment considerations and future recommendations |
 
 # Repository Structure
 
@@ -171,26 +156,39 @@ Five supervised learning algorithms were evaluated.
 
 ---
 
-# Explainable AI
+## 📈 ROC Curve Comparison
 
-To improve transparency and stakeholder trust, the champion model was interpreted using two complementary Explainable AI techniques.
+<p align="center">
+  <img src="images/roc_curve.png" width="85%">
+</p>
 
-## SHAP
+The Gradient Boosting model achieved the highest ROC AUC (0.9889), demonstrating superior discriminatory performance compared to the other evaluated algorithms.
 
-- Global feature importance
-- SHAP Summary Plot
-- Local Waterfall Explanation
-- Behavioural interpretation
+## 🧠 Explainable AI
 
-## LIME
+### SHAP Summary Plot
 
-- Local prediction explanation
-- Model-agnostic interpretation
-- Comparison against SHAP
+<p align="center">
+  <img src="images/shap_summary.png" width="90%">
+</p>
 
-Both techniques consistently identified customer transaction behaviour as the primary driver of churn.
+...
 
----
+### SHAP Waterfall Plot
+
+<p align="center">
+  <img src="images/shap_waterfall.png" width="90%">
+</p>
+
+...
+
+### LIME Local Explanation
+
+<p align="center">
+  <img src="images/lime_explanation.png" width="90%">
+</p>
+
+...
 
 # Key Findings
 
@@ -218,32 +216,42 @@ Recommended actions include:
 
 ---
 
-# Technologies
+## 🛠 Technologies
+
+### Programming Language
 
 - Python
-- Pandas
-- NumPy
-- Matplotlib
+
+### Machine Learning
+
 - Scikit-Learn
 - SHAP
 - LIME
-- Joblib
+
+### Data Processing
+
+- Pandas
+- NumPy
+
+### Visualisation
+
+- Matplotlib
+
+### Development
+
 - Jupyter Notebook
+- Joblib
 
 ---
 
-# Future Improvements
+## 🚀 Future Improvements
 
-Potential extensions include:
-
-- GitHub Actions CI/CD
-- Unit testing
-- AWS SageMaker deployment
-- Model monitoring
-- Automated retraining
-- Interactive Streamlit dashboard
-- Docker containerisation
-
+- Deploy the champion model using AWS SageMaker
+- Implement GitHub Actions CI/CD
+- Add automated unit testing
+- Containerise the application using Docker
+- Monitor model drift in production
+- Develop an interactive Streamlit dashboard
 ---
 
 # Installation
