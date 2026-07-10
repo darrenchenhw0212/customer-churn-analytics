@@ -26,7 +26,7 @@
 
 Customer churn is one of the most significant challenges faced by financial institutions. Acquiring new customers is substantially more expensive than retaining existing ones, making early identification of at-risk customers essential for improving profitability and long-term customer loyalty.
 
-This project develops an end-to-end customer churn analytics pipeline capable of identifying customers with a high likelihood of churn using supervised machine learning.
+This project develops an end-to-end customer churn analytics pipeline capable of accurately identifying customers with a high likelihood of churn using supervised machine learning.
 
 Unlike a typical university assignment, this repository reproduces and extends an enterprise workflow originally developed using **SAS Viya** by implementing the entire analytics pipeline in **Python**, while improving reproducibility, model explainability, and documentation.
 
@@ -94,40 +94,6 @@ The following diagram summarises the complete analytics workflow, from the origi
 | **05 – Model Interpretation** | Explainable AI using SHAP and LIME |
 | **06 – Business Recommendations** | Business insights, deployment considerations and future recommendations |
 
-# Repository Structure
-
-```text
-customer-churn-analytics/
-
-├── data/
-│   ├── raw/
-│   └── processed/
-│
-├── docs/
-│   ├── project_proposal.pdf
-│   ├── sas_viya_data_preparation.pdf
-│   └── sas_viya_predictive_modelling.pdf
-│
-├── images/
-│
-├── models/
-│   └── gradient_boosting_model.pkl
-│
-├── notebooks/
-│   ├── 01_data_understanding.ipynb
-│   ├── 02_data_preprocessing.ipynb
-│   ├── 03_data_preparation.ipynb
-│   ├── 04_model_development_and_evaluation.ipynb
-│   ├── 05_model_interpretation.ipynb
-│   └── 06_business_recommendations_and_conclusion.ipynb
-│
-├── requirements.txt
-├── LICENSE
-└── README.md
-```
-
----
-
 # Machine Learning Models
 
 Five supervised learning algorithms were evaluated.
@@ -172,7 +138,11 @@ The Gradient Boosting model achieved the highest ROC AUC (0.9889), demonstrating
   <img src="images/shap_summary.png" width="90%">
 </p>
 
-...
+The SHAP summary plot shows that Total_Trans_Ct,
+Total_Trans_Amt and Total_Relationship_Count are
+the three most influential predictors.
+
+---
 
 ### SHAP Waterfall Plot
 
@@ -180,7 +150,10 @@ The Gradient Boosting model achieved the highest ROC AUC (0.9889), demonstrating
   <img src="images/shap_waterfall.png" width="90%">
 </p>
 
-...
+This customer was classified as high-risk primarily
+due to low transaction count and reduced spending.
+
+---
 
 ### LIME Local Explanation
 
@@ -188,7 +161,10 @@ The Gradient Boosting model achieved the highest ROC AUC (0.9889), demonstrating
   <img src="images/lime_explanation.png" width="90%">
 </p>
 
-...
+LIME independently identified the same behavioural
+drivers, supporting the robustness of the explanation.
+
+---
 
 # Key Findings
 
@@ -252,6 +228,40 @@ Recommended actions include:
 - Containerise the application using Docker
 - Monitor model drift in production
 - Develop an interactive Streamlit dashboard
+---
+
+# Repository Structure
+
+```text
+customer-churn-analytics/
+
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── docs/
+│   ├── project_proposal.pdf
+│   ├── sas_viya_data_preparation.pdf
+│   └── sas_viya_predictive_modelling.pdf
+│
+├── images/
+│
+├── models/
+│   └── gradient_boosting_model.pkl
+│
+├── notebooks/
+│   ├── 01_data_understanding.ipynb
+│   ├── 02_data_preprocessing.ipynb
+│   ├── 03_data_preparation.ipynb
+│   ├── 04_model_development_and_evaluation.ipynb
+│   ├── 05_model_interpretation.ipynb
+│   └── 06_business_recommendations_and_conclusion.ipynb
+│
+├── requirements.txt
+├── LICENSE
+└── README.md
+```
+
 ---
 
 # Installation
