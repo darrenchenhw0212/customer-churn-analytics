@@ -1,6 +1,6 @@
 # Customer Churn Analytics using Machine Learning
 
-> Reproducing and enhancing an enterprise SAS Viya customer churn workflow using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
+Reproducing and enhancing an enterprise SAS Viya customer churn workflow using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![Scikit-Learn](https://img.shields.io/badge/scikit--learn-ML-orange)
@@ -37,7 +37,18 @@ The project demonstrates the complete lifecycle of a production-oriented machine
 - Reproducible notebook-based workflow with version control
 
 Rather than treating Python as a replacement for SAS, this repository shows how enterprise analytics workflows can be translated into reproducible open-source machine learning pipelines.
---
+
+---
+
+## 📊 Project Workflow
+
+The following diagram summarises the complete analytics workflow, from the original enterprise SAS Viya implementation to the enhanced Python-based machine learning pipeline.
+
+<p align="center">
+  <img src="images/churn_workflow.svg" alt="Customer Churn Analytics Workflow" width="100%">
+</p>
+
+---
 
 # Project Overview
 
@@ -61,44 +72,20 @@ The objectives of this project are to:
 
 ---
 
-# Original SAS Viya Workflow
+## 📄 Original Enterprise Documentation
 
-Prior to this Python implementation, the complete analytics workflow was developed using **SAS Viya**, including:
+The Python implementation in this repository is based on an enterprise analytics workflow originally developed using **SAS Viya**.
 
-- Data Preparation
-- Feature Engineering
-- Model Studio Pipelines
-- Champion Model Selection
-- Model Manager Scoring
-- Business Recommendation Report
+The original project documentation is included for reference:
 
-This repository reproduces that workflow using open-source Python libraries while extending it with:
+- 📘 [Project Proposal](docs/project_proposal.pdf)
+- 📙 [Data Preparation Report](docs/data_preparation_report.pdf)
+- 📗 [Predictive Modelling Report](docs/predictive_modelling_report.pdf)
 
-- additional evaluation metrics
-- SHAP explainability
-- LIME explainability
-- improved reproducibility
-- GitHub documentation
-- engineering best practices
-
-Supporting documentation describing the original enterprise workflow is included in the **docs/** directory:
-
-- Project Proposal
-- SAS Viya Data Preparation Report
-- SAS Viya Predictive Modelling Report
-
-These documents provide the foundation for the Python implementation presented in this repository.
+These reports document the original SAS Viya implementation, including enterprise data preparation, model development, champion model selection, and business recommendations that were later reproduced and enhanced using Python.
 
 ---
 
-## 📊 Project Workflow
-
-The following diagram summarises the complete analytics workflow, from the original enterprise SAS Viya implementation to the enhanced Python-based machine learning pipeline.
-
-<p align="center">
-  <img src="images/churn_workflow.svg" alt="Customer Churn Analytics Workflow" width="100%">
-</p>
----
 # 🏦 Enterprise SAS Viya Workflow
 
 Before reproducing the workflow in Python, the complete analytics pipeline was originally developed using **SAS Viya Model Studio** as part of an enterprise predictive modelling workflow.
@@ -166,25 +153,17 @@ Five supervised learning algorithms were evaluated.
 
 # Champion Model
 
-**Gradient Boosting** achieved the strongest overall performance.
-
-| Metric | Score |
-|---------|------:|
-| Accuracy | **95.43%** |
-| Precision | **80.89%** |
-| Recall | **93.65%** |
-| F1-score | **86.80%** |
-| ROC AUC | **0.9889** |
-
----
-
 ## 📈 ROC Curve Comparison
 
 <p align="center">
   <img src="images/roc_curve.png" width="85%">
 </p>
 
-The Gradient Boosting model achieved the highest ROC AUC (0.9889), demonstrating superior discriminatory performance compared to the other evaluated algorithms.
+Gradient Boosting consistently outperformed the remaining machine learning algorithms, achieving the highest ROC AUC (**0.9889**).
+
+The ROC curve rises sharply toward the upper-left corner, indicating excellent discrimination between churned and retained customers while maintaining a very low false positive rate.
+
+This makes the model well suited for identifying high-risk customers early, enabling proactive customer retention strategies.
 
 # 🧠 Explainable AI
 
@@ -202,16 +181,27 @@ The explainability workflow progresses from traditional model feature importance
 
 The original SAS workflow identified transaction behaviour as the dominant predictor of customer churn.
 
+| Metric | Score |
+|---------|------:|
+| Accuracy | **95.43%** |
+| Precision | **80.89%** |
+| Recall | **93.65%** |
+| F1-score | **86.80%** |
+| ROC AUC | **0.9889** |
+
+---
+
 ### SHAP Summary Plot
 
 <p align="center">
   <img src="images/shap_summary.png" width="90%">
 </p>
 
-The SHAP summary plot shows that Total_Trans_Ct,
-Total_Trans_Amt and Total_Relationship_Count are
-the three most influential predictors.
+The SHAP summary plot reveals that **customer behaviour**, rather than demographic characteristics, drives the majority of churn predictions.
 
+Transaction frequency (`Total_Trans_Ct`), transaction amount (`Total_Trans_Amt`), and the number of banking relationships (`Total_Relationship_Count`) consistently contribute the greatest impact on model predictions.
+
+This indicates that declining customer engagement is a stronger predictor of churn than static customer demographics.
 ---
 
 ### SHAP Waterfall Plot
@@ -220,8 +210,11 @@ the three most influential predictors.
   <img src="images/shap_waterfall.png" width="90%">
 </p>
 
-This customer was classified as high-risk primarily
-due to low transaction count and reduced spending.
+The waterfall plot explains an individual customer's prediction by showing how each feature contributes to the final churn probability.
+
+For this customer, a **low transaction count**, **reduced spending**, and **limited banking relationships** collectively pushed the prediction towards the churn class.
+
+This level of local interpretability enables relationship managers to understand *why* a customer has been identified as high risk and supports personalised intervention strategies.
 
 ---
 
@@ -231,8 +224,11 @@ due to low transaction count and reduced spending.
   <img src="images/lime_explanation.png" width="90%">
 </p>
 
-LIME independently identified the same behavioural
-drivers, supporting the robustness of the explanation.
+LIME provides an independent local explanation of the same prediction using a surrogate interpretable model.
+
+The explanation closely aligns with SHAP by highlighting low transaction activity and reduced customer engagement as the primary drivers of churn.
+
+The agreement between SHAP and LIME increases confidence that the Gradient Boosting model is making consistent and reliable predictions rather than relying on spurious correlations.
 
 ---
 
@@ -273,6 +269,20 @@ Recommended actions include:
 - cross-selling banking products
 - proactive customer engagement
 - CRM-based churn monitoring
+
+---
+
+# 📚 Lessons Learned
+
+Developing this project provided several practical insights into both enterprise analytics and modern machine learning workflows.
+
+Key lessons include:
+
+- Customer behavioural variables consistently outperformed demographic variables for churn prediction.
+- Ensemble learning methods achieved substantially better predictive performance than linear baseline models.
+- Explainable AI techniques such as SHAP and LIME significantly improved model transparency and stakeholder confidence.
+- Reproducing an enterprise SAS Viya workflow using open-source Python tools improved reproducibility, documentation, and flexibility.
+- Business value is created not only through accurate predictions, but also through interpretable insights that support actionable retention strategies.
 
 ---
 
@@ -378,6 +388,24 @@ customer-churn-analytics/
 
 ---
 
+# 🔄 Reproducing Results
+
+To reproduce the complete analytics workflow, execute the notebooks sequentially:
+
+```text
+01_data_understanding.ipynb
+        ↓
+02_data_preprocessing.ipynb
+        ↓
+03_data_preparation.ipynb
+        ↓
+04_model_development_and_evaluation.ipynb
+        ↓
+05_model_interpretation.ipynb
+        ↓
+06_business_recommendations_and_conclusion.ipynb
+
+---
 # Installation
 
 Clone the repository.
