@@ -36,7 +36,7 @@ The project demonstrates an end-to-end analytical machine learning workflow, fro
 - Business-focused recommendations for customer retention
 - Reproducible notebook-based workflow with version control
 
-Rather than treating Python as a replacement for SAS, this repository shows how enterprise analytics workflows can be translated into reproducible open-source machine learning pipelines.
+Rather than replacing SAS Viya, this repository demonstrates how an analytics workflow originally implemented in an enterprise platform can be reproduced, extended, and documented using an open-source Python ecosystem.
 
 ---
 
@@ -47,6 +47,19 @@ The following diagram summarises the complete analytics workflow, from the origi
 <p align="center">
   <img src="images/churn_workflow.svg" alt="Customer Churn Analytics Workflow" width="100%">
 </p>
+
+---
+
+## 📒 Notebook Guide
+
+| Notebook | Description |
+|-----------|-------------|
+| **01 – Data Understanding and Quality** | Data exploration, quality assessment and churn analysis |
+| **02 – Data Preparation** | Missing value handling, encoding and data cleaning |
+| **03 – Feature Engineering** | Feature engineering and preparation of modelling datasets |
+| **04 – Model Development and Evaluation** | Model training, evaluation and champion model selection |
+| **05 – Model Interpretation using SHAP and LIME** | Explainable AI using SHAP and LIME |
+| **06 – Business Recommendations and Conclusion** | Business insights, deployment considerations and future recommendations |
 
 ---
 
@@ -62,21 +75,15 @@ Unlike a typical university assignment, this repository reproduces and extends a
 
 ## Dataset
 
-The project uses the public Credit Card Customers dataset containing 10,127 customer records and demographic, account, and transaction attributes. The target was derived from `Attrition_Flag`, with attrited customers represented as the positive churn class.
-
-Leakage-prone classifier-output columns supplied with the original dataset were excluded before modelling.
-
----
-
-## Objectives
-
-The objectives of this project are to:
-
-- Develop an accurate customer churn prediction model
-- Compare multiple supervised machine learning algorithms
-- Select the optimal champion model using comprehensive evaluation metrics
-- Interpret model behaviour using Explainable AI (SHAP & LIME)
-- Translate technical findings into actionable business recommendations
+| Attribute | Value |
+|-----------|-------|
+| Dataset | Credit Card Customers |
+| Source | Kaggle |
+| Records | 10,127 |
+| Target | `Attrition_Flag` |
+| Problem Type | Binary Classification |
+| Positive Class | Attrited Customer |
+| Leakage Handling | Naive Bayes classifier output columns removed prior to modelling |
 
 ---
 
@@ -146,17 +153,6 @@ Both implementations selected Gradient Boosting as the strongest model. However,
 | Python | Gradient Boosting | 0.9889 |
 
 ---
-
-## 📒 Notebook Guide
-
-| Notebook | Description |
-|-----------|-------------|
-| **01 – Data Understanding and Quality** | Data exploration, quality assessment and churn analysis |
-| **02 – Data Preparation** | Missing value handling, encoding and data cleaning |
-| **03 – Feature Engineering** | Feature engineering and preparation of modelling datasets |
-| **04 – Model Development and Evaluation** | Model training, evaluation and champion model selection |
-| **05 – Model Interpretation using SHAP and LIME** | Explainable AI using SHAP and LIME |
-| **06 – Business Recommendations and Conclusion** | Business insights, deployment considerations and future recommendations |
 
 ## Machine Learning Models
 
@@ -283,57 +279,42 @@ The analyses consistently demonstrated that:
 
 ## Business Recommendations
 
-The model supports proactive customer retention by identifying high-risk customers before they churn.
+The analysis suggests several data-driven retention strategies.
 
-Recommended actions include:
+| Model Finding | Recommended Action |
+|---------------|--------------------|
+| Declining transaction count | Trigger early retention campaigns |
+| Reduced transaction amount | Offer personalised spending incentives |
+| Few banking relationships | Recommend relevant cross-selling opportunities |
+| Reduced customer engagement | Prioritise proactive relationship-manager outreach |
 
-- personalised retention campaigns
-- spending incentives
-- cross-selling banking products
-- proactive customer engagement
-- CRM-based churn monitoring
+These recommendations are intended to guide customer retention initiatives and should be validated through controlled business experiments before large-scale deployment.
 
 ---
 
-## 📚 Lessons Learned
+## Lessons Learned
 
-Developing this project provided several practical insights into both enterprise analytics and modern machine learning workflows.
+Developing this project provided several practical insights into enterprise analytics workflows.
 
-Key lessons include:
-
-- Customer behavioural variables consistently outperformed demographic variables for churn prediction.
-- Ensemble learning methods achieved substantially better predictive performance than linear baseline models.
-- Explainable AI techniques such as SHAP and LIME significantly improved model transparency and stakeholder confidence.
-- Reproducing an enterprise SAS Viya workflow using open-source Python tools improved reproducibility, documentation, and flexibility.
-- Business value is created not only through accurate predictions, but also through interpretable insights that support actionable retention strategies.
+- High predictive performance alone is insufficient without model interpretability.
+- Reproducing proprietary analytics workflows in Python improves transparency and reproducibility.
+- Explainable AI enables technical model outputs to be translated into business decisions.
+- Organising machine learning projects into modular notebooks improves maintainability and collaboration.
 
 ---
 
 ## 🛠 Technologies
 
-### Programming Language
-
-- Python
-
-### Machine Learning
-
-- Scikit-Learn
-- SHAP
-- LIME
-
-### Data Processing
-
-- Pandas
-- NumPy
-
-### Visualisation
-
-- Matplotlib
-
-### Development
-
-- Jupyter Notebook
-- Joblib
+| Area | Technologies |
+|------|--------------|
+| 💻 **Programming** | Python 3.12 |
+| 📊 **Data Analysis** | Pandas, NumPy |
+| 🤖 **Machine Learning** | Scikit-learn |
+| 🧠 **Explainable AI** | SHAP, LIME |
+| 📈 **Visualisation** | Matplotlib |
+| 💾 **Model Persistence** | Joblib |
+| 🧪 **Development** | Jupyter Notebook, VS Code |
+| 🌐 **Version Control** | Git, GitHub |
 
 ---
 
@@ -342,17 +323,6 @@ Key lessons include:
 - Add automated tests and GitHub Actions validation.
 - Package preprocessing and prediction in a single deployable pipeline.
 - Expose churn probability through a lightweight FastAPI service.
-
----
-
-## 📦 Key Deliverables
-
-- Enterprise SAS Viya workflow documentation
-- Six end-to-end Python notebooks
-- Trained Gradient Boosting model
-- Explainable AI (SHAP & LIME) analyses
-- Business recommendation report
-- Workflow diagrams and visualisations
 
 --- 
 
@@ -424,6 +394,16 @@ To reproduce the complete analytics workflow, execute the notebooks from the rep
 06_business_recommendations_and_conclusion.ipynb
 ```
 The workflow produces processed datasets under data/processed/ and the trained model artifact under models/.
+
+Successful execution generates:
+
+- Processed datasets under `data/processed/`
+- Trained Gradient Boosting model under `models/`
+- ROC curve visualisations
+- Confusion matrices
+- SHAP plots
+- LIME explanations
+
 ---
 
 ## Limitations
