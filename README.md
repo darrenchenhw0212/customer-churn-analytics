@@ -1,6 +1,6 @@
 # Customer Churn Analytics
 
-Reproducing and extending a customer churn analytics workflow, originally built in SAS Viya during coursework, using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
+Reproducing and extending a customer churn analytics workflow, originally built in SAS Viya using Python, Explainable AI (SHAP & LIME), and business-driven machine learning.
 
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
@@ -68,7 +68,7 @@ Customer churn is one of the most significant challenges faced by financial inst
 
 This project develops an end-to-end customer churn analytics pipeline designed to estimate customer churn risk using supervised machine learning.
 
-This started as a SAS Viya coursework project. I rebuilt the full pipeline in Python to practice production-style tooling — reproducibility, explainability, and documentation beyond what the original assignment required.
+This project was originally developed in SAS Viya. I rebuilt the full pipeline in Python to practice production-style tooling — reproducibility, explainability, and documentation beyond what the original assignment required.
 
 ---
 
